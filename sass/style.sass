@@ -1,0 +1,319 @@
+@import reset.sass
+div,
+li
+    box-sizing: border-box
+body
+    height: 100vh
+a
+    color: inherit
+    text-decoration: none
+
+:root 
+    --color-dashboard:#047857
+    --color-dashboard-text: #fff
+    --background-color__main: #fafaf9
+    --background-color__secondary: #e5e7eb
+    --background-color__secondary_shadow: #c0c0c0
+    --color-text-gray: #5c5c5c
+.container
+    height: 100%
+    display: grid
+    grid: 175px 3fr / 1fr 4fr
+    
+@mixin btn-transparent 
+    border: none
+    background-color:  transparent
+
+
+// ==============HEADER==========
+.header 
+    display: grid
+    box-sizing: border-box
+    padding: 10px 20px
+    // grid-template-rows: 75px 100px
+    background-color: var(--background-color__main)
+    // border: solid 1px red
+    box-shadow: 2px 2px 5px 1px var(--background-color__secondary_shadow)
+    z-index: 1
+    &__top
+        display: grid
+        grid-template-columns: 2fr 1fr 
+        justify-content: space-between
+        align-items: center
+        gap: 100px
+
+    &__search
+        display: flex
+        align-items: center
+        
+
+        
+
+    &__user-info
+        
+
+    &__botom
+        display: grid
+        grid-auto-flow: column
+        // grid-template-columns: 1fr 1fr 
+        justify-content: space-between
+
+    &__greating
+        display: grid
+        grid-template-columns: 100px 1fr
+        align-items: center
+        margin-left: 10px
+
+    &__action
+
+
+
+.search 
+  &__btn
+    @include btn-transparent
+    
+
+  &__input
+    flex-grow: 1
+    background-color: var(--background-color__secondary)
+    border-radius: 15px
+    border: none
+    padding: 5px 10px
+    max-width: 450px
+
+.user 
+  &-info
+
+
+  &-info__list
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    
+    gap: 20px
+
+  &-info__item
+
+
+  &-notification
+    @include btn-transparent
+
+
+  &-link
+
+
+  &-info__img
+    height: 50px
+    width: 50px
+
+  &-info__name
+
+
+
+.greating 
+    
+    &__user-pickture
+        height: 80px
+        width: 80px
+
+
+
+    &__text
+        font-weight: 700
+        font-size: 14px
+        b   
+            font-size: 20px
+        
+
+
+.action 
+  &__list
+    height: 100%
+    display: grid
+    grid-auto-flow: column
+    // grid-template-columns: 1fr 1fr 1fr
+    gap: 20px
+    align-items: center
+    justify-content: center
+  &__item
+
+
+  &__btn
+    background-color: var(--color-dashboard)
+    color: var(--color-dashboard-text)
+    border-radius: 20px
+    border: none
+    padding: 10px 20px 
+
+// =======DASHBOARD===============
+.dashboard 
+    grid-row:  1 / 3
+    display: grid
+    grid-template-rows: 60px 1fr 
+    gap: 100px
+    background-color: var(--color-dashboard)
+    color: var(--color-dashboard-text)
+
+    padding: 15px
+    &__title
+        font-size: 30px
+        display: flex
+        align-items: center
+    &__icon
+        width: 50px
+        height: 50px
+        fill: white
+        margin-right: 10px
+    &__links-list
+        display: grid
+        grid-template-rows: repeat(9,50px)
+  
+    &__link
+        display: flex
+        align-items: center
+        &:hover
+            text-decoration: underline
+        &-item 
+
+        &-icon
+            width: 20px
+            height: 20px
+            margin-right: 10px
+
+    &__link-item
+    &__link-icon
+        
+
+
+// =========MAIN===========
+
+
+.main
+    grid-area: 2/2
+    display: grid
+    grid-auto-flow: column
+    grid-template-columns: minmax(380px, 3fr)  minmax(270px, 1fr)
+
+    gap: 25px
+
+    background-color: var(--background-color__secondary)
+
+    padding: 25px
+
+    h2 
+        font-weight: semi-bold
+        padding: 10px 0
+        font-size: 24px
+.info
+
+
+.main-content-element
+    padding: 15px
+    border-radius: 8px
+    background-color: var(--background-color__main)
+    box-shadow: 2px 2px 5px 1px var(--background-color__secondary_shadow)
+
+.projects 
+    &__title
+    &__list-item
+        display: grid
+        gap: 25px
+        grid-template-columns: repeat(auto-fit,minmax(320px,1fr))
+
+    &__item
+
+
+
+.project 
+    padding: 40px 20px 20px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    border-left: 8px #fca13a solid
+
+    &__title
+        font-weight: bold
+        font-size: 20px
+        margin-bottom: 10px
+
+    &__text
+        color: var(--color-text-gray)
+
+    &__actions-list
+        display: flex
+        gap: 20px
+        align-self: end
+        margin-top: 40px
+
+    &__action-btn
+        width: 20px
+        height: 20px
+        padding: 0
+        border: none
+        background-color: transparent
+        background-size: contain
+
+        &_star
+            // background-image: url("../img/add-to-star.png") 
+        &_watch
+            // background-image: url("../img/add-to-watch.png")    
+        &_share
+            // background-image: url("../img/btn-share.png") 
+    &__svg-icon 
+        height: 100%
+        width: 100%
+
+.announcements-and-trending
+    display: flex
+    flex-direction: column
+    gap: 20px
+
+.announcements 
+    display: flex
+    flex-direction: column
+    &__title
+    &__list
+        display: flex
+        flex-direction: column
+
+    &__list-item
+        padding: 15px
+        &:not(:last-child)
+            border-bottom: 1px solid var(--background-color__secondary_shadow)
+
+
+.announcement 
+    &__title
+        font-weight: 600
+
+    &__text
+        margin-top: 10px
+        color: var(--color-text-gray)
+
+
+.trending 
+    flex-grow: 1
+    display: flex
+    flex-direction: column
+    
+    &__title
+    &__list
+        display: grid
+        gap: 15px
+        grid-auto-rows: 50px
+        padding: 20px
+
+    &__card
+        
+.card 
+    display: grid
+    grid-template-columns: 50px 1fr
+    &__info
+
+    &__img
+        height: 50px
+        width: 50px
+    &__link
+    &__name
+        color: var(--color-text-gray)
+
