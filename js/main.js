@@ -1,4 +1,18 @@
+const DomElement = (() => {
+
+    const board = document.querySelector('.game_board');
+    // const boardChildrenArr = Array.from(board.children);
+
+    return {
+        board,
+        // boardChildrenArr
+    }
+
+})()
+
+
 const gameBoard = (() => {
+
     const gameboard = []
 
     const cellFactory = (setCoordinates, setPlayerPick = '') => {
@@ -9,14 +23,32 @@ const gameBoard = (() => {
             let y = setY
             return { x, y }
         }
+        const changeValue = (pick) => {
+            console.log('c');
+            value = pick
+            return value
+        }
+
+        const addToDOM = () => {
+            const elem = document.createElement('div')
+            elem.classList.add('board_column')
+            elem.dataset.value = value
+
+            const addListener = () => {
+                elem.addEventListener('click', changeValue(setPlayerPick))
+            }
+
+            return elem
+        }
 
         const coordinates = coordinateFactory(setCoordinates[0], setCoordinates[1])
-        return { coordinates, value }
+
+        return { coordinates, value, addToDOM }
     }
 
-    // const newCell = cellFactory([1, 1])
 
     const fillGameBoard = (() => {
+        const board = document.querySelector('.game_board');
         for (let x = 0; x < 3; x++) {
             for (let y = 0; y < 3; y++) {
 
@@ -24,16 +56,30 @@ const gameBoard = (() => {
                 cell.changeValue = (player) => {
                     player.side === 'x' ? cell.value = 'x' : cell.value = 'y'
                 }
-                gameboard.push(cell)
+                DomElement.board.append(cell.addToDOM())
+
+
             }
         }
     })()
 
+    console.log(gameboard);
+    return gameboard
+
 })()
 
-const Player = () => {
+const playerFactory = (mark, name = '') => {
 
+    return { mark, name }
 }
 
-// const player1 = new Player()
-// const player2 = new Player()
+
+
+const player1 = playerFactory('x')
+const player2 = playerFactory('o')
+
+const clickPlayer = (event, player) => {
+    console.log(event);
+}
+
+// DomElement.boardChildrenArr.forEach(addEventListener('click', clickPlayer(event, player1))
