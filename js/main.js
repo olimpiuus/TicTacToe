@@ -4,8 +4,7 @@ const DomElement = (() => {
     // const boardChildrenArr = Array.from(board.children);
 
     return {
-        board,
-        // boardChildrenArr
+        board
     }
 
 })()
@@ -15,55 +14,69 @@ const gameBoard = (() => {
 
     const gameboard = []
 
-    const cellFactory = (setCoordinates, setPlayerPick = '') => {
-        let value = null
+    const cellFactory = (setCoordinates) => {
+        
+        let value = 'x'
+        const elem = document.createElement('div')
+        elem.classList.add('board_column')
 
-        const coordinateFactory = (setX, setY) => {
-            let x = setX
-            let y = setY
-            return { x, y }
+        const coordinates = { 
+            x:setCoordinates[0],
+            y:setCoordinates[1]
         }
-        const changeValue = (pick) => {
-            console.log('c');
-            value = pick
-            return value
-        }
-
-        const addToDOM = () => {
-            const elem = document.createElement('div')
-            elem.classList.add('board_column')
+        
+        const changeValue = (newValue) => {
+            value = newValue
             elem.dataset.value = value
+            getvalue()
+            
+        }
+        const getvalue = ()=>console.log(value)
 
-            const addListener = () => {
-                elem.addEventListener('click', changeValue(setPlayerPick))
-            }
+        const changeValueX = ()=>changeValue('x')
 
-            return elem
+
+        const addListenerPlayer1 = ()=> {
+            elem.addEventListener('click', changeValueX)
         }
 
-        const coordinates = coordinateFactory(setCoordinates[0], setCoordinates[1])
+        const addListenerPlayer2 = ()=>{
+            elem.removeEventListener('click')
+            elem.addEventListener('click', ()=>{
+                changeValue('o')
+            })
+        }
 
-        return { coordinates, value, addToDOM }
+        return {  elem, coordinates, changeValue, addListenerPlayer1, addListenerPlayer2, getvalue}
     }
 
 
     const fillGameBoard = (() => {
         const board = document.querySelector('.game_board');
+        const cellsArray = []
         for (let x = 0; x < 3; x++) {
             for (let y = 0; y < 3; y++) {
 
-                let cell = cellFactory([x, y])
-                cell.changeValue = (player) => {
-                    player.side === 'x' ? cell.value = 'x' : cell.value = 'y'
-                }
-                DomElement.board.append(cell.addToDOM())
-
+                const cell = cellFactory([x, y])
+                // cell.changeValue = (player) => {
+                //     player.side === 'x' ? cell.value = 'x' : cell.value = 'y'
+                // }
+                cell.addListenerPlayer1()
+                DomElement.board.append(cell.elem)
+                cellsArray.push(cell)
+                // cell.addListenerPlayer2()
 
             }
         }
+        // board.addEventListener('click', ()=>{
+        //     cellsArray.forEach((el)=>{
+        //         el.getvalue()
+        //     })
+        // })
+
+        
     })()
 
-    console.log(gameboard);
     return gameboard
 
 })()
